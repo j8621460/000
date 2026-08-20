@@ -103,6 +103,7 @@ import com.celzero.bravedns.util.Utilities.isOtherVpnHasAlwaysOn
 import com.celzero.bravedns.util.Utilities.isPrivateDnsActive
 import com.celzero.bravedns.util.Utilities.showToastUiCentered
 import com.celzero.firestack.backend.Backend
+import com.celzero.bravedns.util.NetworkAlertManager
 import com.facebook.shimmer.Shimmer
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
@@ -2086,6 +2087,15 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
             b.fhsProtectionLevelTxt.setTextColor(fetchTextColor(R.color.accentBad))
             b.fhsProtectionLevelTxt.text = getString(R.string.status_no_network)
         }
+
+        // Fires the alert off the *actual on-screen colour*, not the state enum alone.
+        // This is what catches "Protected with SOCKS5" / "Protected with WireGuard"
+        // rendered in red: the label still reads as protected, but the colour is the
+        // real signal that something is wrong. reportUiStatus() is edge-triggered, so
+        // re-rendering the same colour on every UI refresh does not re-alert.
+        val isRedNow =
+            b.fhsProtectionLevelTxt.currentTextColor == fetchTextColor(R.color.accentBad)
+        NetworkAlertManager.reportUiStatus(requireContext(), isRedNow)
     }
 
     private fun isAnotherVpnActive(): Boolean {

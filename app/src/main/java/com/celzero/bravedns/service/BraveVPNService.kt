@@ -142,6 +142,7 @@ import com.celzero.firestack.intra.Controller
 import com.celzero.firestack.intra.Mark
 import com.celzero.firestack.intra.PreMark
 import com.celzero.firestack.intra.SocketSummary
+import com.celzero.bravedns.util.NetworkAlertManager
 import com.google.common.cache.Cache
 import com.google.common.cache.CacheBuilder
 import com.google.common.cache.RemovalCause
@@ -3269,6 +3270,9 @@ class BraveVPNService : VpnService(), ConnectionMonitor.NetworkListener, Bridge,
                 && prevHandles != currHandles
             if (networkSwitched) {
                 Logger.i(LOG_TAG_VPN, "onNetworkChange: underlying network switched, forcing VPN restart")
+                // Only on a genuine interface change (both sides non-empty and different) --
+                // not on every onNetworkChange callback, which fires far more often.
+                NetworkAlertManager.fire(applicationContext, NetworkAlertManager.Kind.INTERFACE_SWITCH)
             }
 
             // Sprint 17: restart usque on ANY interface transition, including WiFi→void→LTE.

@@ -181,6 +181,15 @@ class PersistentState(context: Context) : SimpleKrate(context), KoinComponent {
     // this fork ships only Dark Plus; 5 is Themes.DARK_PLUS.id
     var theme by intPref("app_theme").withDefault<Int>(5)
 
+    // play a sound when tunnel/proxy/network status changes in a way the user cares
+    // about (see NetworkAlertManager). on by default -- the point of the feature is to
+    // fail loud rather than let a silent drop go unnoticed.
+    var networkAlertsEnabled by booleanPref("pref_network_alerts_enabled").withDefault<Boolean>(true)
+
+    // content Uri of the chosen alert sound, as returned by the system notification
+    // sound picker. empty means "use the device default notification sound".
+    var networkAlertSoundUri by stringPref("pref_network_alert_sound_uri").withDefault<String>("")
+
     // user selected notification action type, ref: Constants#NOTIFICATION_ACTION_STOP
     var notificationActionType by intPref("notification_action").withDefault<Int>(0)
 

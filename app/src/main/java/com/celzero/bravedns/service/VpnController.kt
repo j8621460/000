@@ -34,6 +34,7 @@ import com.celzero.firestack.backend.NetStat
 import com.celzero.firestack.backend.RDNS
 import com.celzero.firestack.backend.RouterStats
 import com.celzero.firestack.intra.Controller
+import com.celzero.bravedns.util.NetworkAlertManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
@@ -131,9 +132,49 @@ object VpnController : KoinComponent {
         lastConnectedServerName = name
     }
 
+    // Buckets a tunnel State into "bad" (true) / "good" (false), or null when the state
+    // carries no verdict. NEW and PAUSED are deliberately null: they are not failures,
+    // and treating them as a bucket change would fire an alert every time the user
+    // pauses or the service is re-created.
+    private fun isDownState(state: BraveVPNService.State?): Boolean? {
+        return when (state) {
+            null,
+            BraveVPNService.State.FAILING,
+            BraveVPNService.State.NO_INTERNET,
+            BraveVPNService.State.DNS_SERVER_DOWN,
+            BraveVPNService.State.DNS_ERROR,
+            BraveVPNService.State.APP_ERROR -> true
+            BraveVPNService.State.WORKING -> false
+            BraveVPNService.State.NEW, BraveVPNService.State.PAUSED -> null
+        }
+    }
+
+    private var lastAlertWasDown: Boolean? = null
+
+    // Edge-triggered: only good->bad or bad->good fires. Repeated states inside the same
+    // bucket (e.g. FAILING then NO_INTERNET) are one transition, not two alerts.
+    private fun maybeAlertOnStateChange(state: BraveVPNService.State?) {
+        val down = isDownState(state) ?: return
+        val prev = lastAlertWasDown
+        lastAlertWasDown = down
+
+        // Only a genuine good<->bad edge alerts; `prev == null` is the first observation.
+        val isRealChange = prev != null && prev != down
+        val ctx = braveVpnService?.applicationContext
+        if (isRealChange && ctx != null) {
+            val kind = if (down) {
+                NetworkAlertManager.Kind.TUNNEL_DOWN
+            } else {
+                NetworkAlertManager.Kind.TUNNEL_UP
+            }
+            NetworkAlertManager.fire(ctx, kind)
+        }
+    }
+
     private fun updateState(state: BraveVPNService.State?) {
         connectionState = state
         connectionStatus.postValue(state)
+        maybeAlertOnStateChange(state)
     }
 
     fun start(context: Context, autoAttempt: Boolean = false) {
