@@ -319,15 +319,17 @@ class HomeScreenFragment : Fragment(R.layout.fragment_home_screen) {
 
         b.fhsCardProxyLl.setOnClickListener {
             Logger.v(LOG_TAG_UI, "$TAG: click event on proxy card")
-            if (appConfig.isWireGuardEnabled()) {
-                startActivity(ScreenType.PROXY_WIREGUARD)
-            } else {
-                startActivity(ScreenType.PROXY)
-            }
+            // Always open the proxy screen. It previously jumped straight to the
+            // WireGuard screen whenever WireGuard happened to be enabled, which made
+            // the proxy settings unreachable from here: enable WireGuard, go back
+            // home, tap Proxy again -- and you land on WireGuard instead of Proxy,
+            // with no way to reach SOCKS5/HTTP/Orbot from this card at all.
+            // ProxySettingsActivity already has a WireGuard row for that.
+            startActivity(ScreenType.PROXY)
             logEvent(
                 EventType.UI_NAVIGATION,
                 "HomeScreen: Proxy card clicked",
-                "Navigating to wg: ${appConfig.isWireGuardEnabled()}  from HomeScreenFragment"
+                "Navigating to ProxySettingsActivity from HomeScreenFragment"
             )
         }
 
