@@ -80,58 +80,20 @@ enum class Themes(val id: Int) {
             }
         }
 
+        // This fork ships a single theme: DARK_PLUS. Every other option was removed
+        // from the picker, and these resolvers ignore both the system setting and any
+        // theme id previously persisted by an older build, so upgrading installs land
+        // on Dark Plus too instead of being stuck on a theme they can no longer pick.
+        // The enum itself is intentionally left intact -- it is referenced from ~40
+        // files, and deleting entries would break them for no user-visible gain.
+        @Suppress("UNUSED_PARAMETER")
         fun getCurrentTheme(isDarkThemeOn: Boolean, theme: Int): Int {
-            // If Frost themes are requested on pre-Android S, fallback to appropriate theme
-            if (isFrostTheme(theme) && !isAtleastS()) {
-                return getTheme(DARK_FROST.id)
-            }
-
-            return if (theme == SYSTEM_DEFAULT.id) {
-                if (isDarkThemeOn) {
-                    getTheme(TRUE_BLACK.id)
-                } else {
-                    getTheme(LIGHT.id)
-                }
-            } else if (theme == LIGHT.id) {
-                getTheme(theme)
-            } else if (theme == DARK.id) {
-                getTheme(theme)
-            } else if (theme == LIGHT_PLUS.id) {
-                getTheme(theme)
-            } else if (theme == DARK_PLUS.id) {
-                getTheme(theme)
-            } else if (theme == DARK_FROST.id) {
-                getTheme(theme)
-            } else {
-                getTheme(TRUE_BLACK.id)
-            }
+            return getTheme(DARK_PLUS.id)
         }
 
+        @Suppress("UNUSED_PARAMETER")
         fun getBottomsheetCurrentTheme(isDarkThemeOn: Boolean, theme: Int): Int {
-            // If Frost themes are requested on pre-Android S, fallback to appropriate theme
-            if (isFrostTheme(theme) && !isAtleastS()) {
-                return getBottomSheetTheme(TRUE_BLACK.id)
-            }
-
-            return if (theme == SYSTEM_DEFAULT.id) {
-                if (isDarkThemeOn) {
-                    getBottomSheetTheme(TRUE_BLACK.id)
-                } else {
-                    getBottomSheetTheme(LIGHT.id)
-                }
-            } else if (theme == LIGHT.id) {
-                getBottomSheetTheme(theme)
-            } else if (theme == DARK.id) {
-                getBottomSheetTheme(theme)
-            } else if (theme == LIGHT_PLUS.id) {
-                getBottomSheetTheme(theme)
-            } else if (theme == DARK_PLUS.id) {
-                getBottomSheetTheme(theme)
-            } else if (theme == DARK_FROST.id) {
-                getBottomSheetTheme(theme)
-            } else {
-                getBottomSheetTheme(TRUE_BLACK.id)
-            }
+            return getBottomSheetTheme(DARK_PLUS.id)
         }
     }
 }

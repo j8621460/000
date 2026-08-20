@@ -432,7 +432,6 @@
     <string name="about_privacy_policy" translatable="true">Đọc chính sách bảo mật</string>
     <string name="error_loading_log_file" translatable="true">Lỗi khi tải tệp nhật ký</string>
     <string name="cd_custom_doh_url_name" translatable="true">DoH %1$s</string>
-    <string name="about_sponsor_link_text" translatable="true">Nhà tài trợ</string>
     <string name="about_app" translatable="true">ứng dụng</string>
     <string name="about_settings" translatable="true">hệ thống</string>
     <string name="about_settings_app_info" translatable="true">Thông tin ứng dụng</string>

@@ -65,8 +65,6 @@
     <string name="status_waiting" description="This text appears during the connection process if Intra needs user permission or the phone is offline.">ожидание</string>
     <string name="status_dns_server_down">dns-сервер не работает</string>
     <string name="status_protected_with_proxy">защищено прокси</string>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_settings">Настройки</string>
     <string name="about_title_desc">Обнаружение и блокировка угроз сетевой безопасности</string>
     <string name="finish">Готово</string>
@@ -281,7 +279,6 @@
     <string name="about_mail_subject">[Rethink]:</string>
     <string name="dns_info_neutral">Копировать ссылку</string>
     <string name="always_on_dialog_positive_btn">Перейдите в настройки</string>
-    <string name="about_sponsor_link_text">Спонсировать</string>
     <string name="unicode_question_sign">❔</string>
     <string name="dns_query_clear_logs_message">Это приведет к удалению журналов DNS на устройстве. Операция является необратимой. Хотите продолжить\?</string>
     <string name="dns_proxy_remove_dialog_title">Удалить DNS-прокси\?</string>

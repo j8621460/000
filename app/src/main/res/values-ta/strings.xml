@@ -8,8 +8,6 @@
     <string name="settings_title_desc">மிகவும் தனிப்பயனாக்கக்கூடிய டிஎன்எச் மற்றும் ஃபயர்வால்</string>
     <string name="dns_mode_info_title">டிஎன்எச்</string>
     <string name="always_on_dialog_neutral">அமைப்புகள்</string>
-    <string name="app_name">"மறுபரிசீலனை  டிஎன்எஸ்"</string>
-    <string name="app_name_small_case">மறுபரிசீலனை</string>
     <string name="title_about">பற்றி</string>
     <string name="title_settings">அமைப்புகள்</string>
     <string name="pause_title_desc">சிறு தூக்கம் போடுகிறேன்…</string>
@@ -361,7 +359,6 @@
     <string name="dc_custom_block_heading" translatable="true">டொமைன் விதிகள்</string>
     <string name="dc_dns_website_heading" translatable="true">டி.என்.எச் பதிவுகளில் வலைத்தள ஐகானைக் காட்டு (சோதனை)</string>
     <string name="dc_proxy_dns_desc" translatable="true">எப்போதும் வயர் கார்ட், சாக்ச் 5, HTTP ப்ராக்சிகள் மீது டி.என்.எச்.</string>
-    <string name="about_sponsor_link_text" translatable="true">ஒப்புரவாளர்</string>
     <string name="about_app_contributors" translatable="true">ஆசிரியர்கள்</string>
     <string name="about_app_translate" translatable="true">மொழிபெயர்த்திடு</string>
     <string name="about_dialog_positive_button" translatable="true">போகலாம்</string>

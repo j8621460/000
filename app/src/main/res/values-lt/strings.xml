@@ -3,9 +3,7 @@
     <string name="title_settings">Nustatymai</string>
     <string name="dns_explanation_dns_connected">Prisijungta prie RethinkDNS</string>
     <string name="dns_explanation_firewall_connected">Prisijungta prie ugniasienės</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="universal_firewall_explanation">Taikykite ugniasienės taisykles visoms programėlėms pagal įrenginio įvykius, pvz., ugniasienę, kai įrenginys užrakintas arba kai tam tikra programėlė nenaudojama.</string>
-    <string name="app_name">RethinkDNS</string>
     <string name="title_about">Apie</string>
     <string name="about_title_desc">Aptik ir blokuok tinklo saugumo grėsmes</string>
     <string name="txt_home">Pagrindinis</string>
@@ -541,7 +539,6 @@
     <string name="about_connect">susisiekti</string>
     <string name="about_bug_no_log_dialog_message">Nepavyko gauti gedimų žurnalų. Ar norite rankiniu būdu pranešti apie klaidą\?</string>
     <string name="about_web">nuorodos</string>
-    <string name="about_sponsor_link_text">Paremti</string>
     <string name="about_twitter_handle">https://twitter.com/rethinkdns</string>
     <string name="about_dialog_neutral_button">Pasiūlyti funkcijas</string>
     <string name="vpn_profile_error">Nepavyko paleisti VPN profilio.</string>

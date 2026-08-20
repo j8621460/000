@@ -36,7 +36,6 @@
     <string name="always_on_dialog_stop_heading">VPN Selalu-Menyala</string>
     <string name="univ_firewall_dialog_title">Hapus aturan IP\?</string>
     <string name="connection_http3">HTTP3</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="rdns_plus">RDNS Plus</string>
     <string name="always_on_dialog_positive_btn">Masuk ke Pengaturan</string>
     <string name="settings_enable_logs">Aktifkan pencatatan riwayat di perangkat</string>
@@ -117,7 +116,6 @@
     <string name="rules_load_failure_desc">Aturan firewall tidak ditemukan</string>
     <string name="other_dns_list_tab1">DoH</string>
     <string name="firewall_rule_block_app_new_install">Aplikasi Baru</string>
-    <string name="about_sponsor_link_text">Sponsor</string>
     <string name="about_settings_app_info">Informasi Aplikasi</string>
     <string name="hsf_stop_btn_state">berhenti</string>
     <string name="firewall_status_unknown">tidak diketahui</string>
@@ -174,7 +172,6 @@
     <string name="new_app_notification_action_deny">Tetap memblok</string>
     <string name="about_web">tautan</string>
     <string name="about_whats_new">Yang baru di versi %1$s</string>
-    <string name="app_name">RethinkDNS</string>
     <string name="unicode_question_sign">❔</string>
     <string name="fav_icon">ikon_fav</string>
     <string name="firewall_rule_unknown">Sumber Tidak Diketahui</string>

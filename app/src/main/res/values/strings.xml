@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name" translatable="false">Rethink</string>
-    <string name="app_name_small_case" translatable="false">rethink</string>
+    <string name="app_name" translatable="false">Rethink Dns Fork</string>
+    <string name="app_name_small_case" translatable="false">rethink fork</string>
     <string name="title_about" translatable="true">About</string>
     <string name="title_settings" translatable="true">Settings</string>
     <string name="title_statistics" translatable="true">Stats</string>
@@ -842,7 +842,7 @@
     <string name="about_docs" translatable="true">Read docs</string>
     <string name="about_privacy_policy" translatable="true">Read privacy policy</string>
     <string name="about_connect" translatable="true">contact</string>
-    <string name="about_sponsor_link_text" translatable="true">Sponsor</string>
+    <string name="about_sponsor_link_text" translatable="true">Sponsor this fork</string>
     <string name="about_app" translatable="true">app</string>
     <string name="about_email" translatable="true">Email us</string>
     <string name="about_settings" translatable="true">system</string>

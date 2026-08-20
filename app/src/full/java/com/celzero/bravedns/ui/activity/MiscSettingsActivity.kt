@@ -931,66 +931,23 @@ class MiscSettingsActivity : AppCompatActivity(R.layout.activity_misc_settings) 
     }
 
     private fun showThemeDialog() {
+        // This fork ships a single theme (Dark Plus), so the picker lists only that
+        // entry. Themes.getCurrentTheme() ignores the stored id anyway, so selecting
+        // it is a no-op; the dialog is kept rather than removed so the existing
+        // "Appearance" settings row still leads somewhere sensible.
         val alertBuilder = MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
         alertBuilder.setTitle(getString(R.string.settings_theme_dialog_title))
-        val items = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            arrayOf(
-                getString(R.string.settings_theme_dialog_themes_1),
-                getString(R.string.settings_theme_dialog_themes_2),
-                getString(R.string.settings_theme_dialog_themes_3),
-                getString(R.string.settings_theme_dialog_themes_4),
-                getString(R.string.settings_theme_dialog_themes_5),
-                getString(R.string.settings_theme_dialog_themes_6),
-                getString(R.string.settings_theme_dialog_themes_7)
-            )
-        } else {
-            arrayOf(
-                getString(R.string.settings_theme_dialog_themes_1),
-                getString(R.string.settings_theme_dialog_themes_2),
-                getString(R.string.settings_theme_dialog_themes_3),
-                getString(R.string.settings_theme_dialog_themes_4),
-                getString(R.string.settings_theme_dialog_themes_5),
-                getString(R.string.settings_theme_dialog_themes_6)
-            )
-        }
-        val checkedItem = persistentState.theme
-        alertBuilder.setSingleChoiceItems(items, checkedItem) { dialog, which ->
+        val items = arrayOf(getString(R.string.settings_theme_dialog_themes_6))
+        alertBuilder.setSingleChoiceItems(items, 0) { dialog, _ ->
             dialog.dismiss()
-            if (persistentState.theme == which) {
-                return@setSingleChoiceItems
-            }
-
-            persistentState.theme = which
-            isThemeChanged = true
-            logEvent("App theme changed, theme id: $theme")
-            when (which) {
-                Themes.SYSTEM_DEFAULT.id -> {
-                    if (isDarkThemeOn()) {
-                        setThemeRecreate(R.style.AppTheme)
-                    } else {
-                        setThemeRecreate(R.style.AppThemeWhite)
-                    }
-                }
-                Themes.LIGHT.id -> {
-                    setThemeRecreate(R.style.AppThemeWhite)
-                }
-                Themes.DARK.id -> {
-                    setThemeRecreate(R.style.AppTheme)
-                }
-                Themes.TRUE_BLACK.id -> {
-                    setThemeRecreate(R.style.AppThemeTrueBlack)
-                }
-                Themes.LIGHT_PLUS.id -> {
-                    setThemeRecreate(R.style.AppThemeWhitePlus)
-                }
-                Themes.DARK_PLUS.id -> {
-                    setThemeRecreate(R.style.AppThemeTrueBlackPlus)
-                }
-                Themes.DARK_FROST.id -> {
-                    setThemeRecreate(R.style.AppThemeTrueBlackFrost)
-                }
+            if (persistentState.theme != Themes.DARK_PLUS.id) {
+                persistentState.theme = Themes.DARK_PLUS.id
+                isThemeChanged = true
+                logEvent("App theme pinned to Dark Plus")
+                setThemeRecreate(R.style.AppThemeTrueBlackPlus)
             }
         }
+        alertBuilder.setCancelable(true)
         alertBuilder.create().show()
     }
 

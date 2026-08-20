@@ -19,8 +19,6 @@
     <string name="firewall_mode_notification_title">Захищено! Підключено до Брандмауера.</string>
     <string name="always_on_dialog_positive">Зупинити</string>
     <string name="always_on_dialog_neutral">Налаштуваннях</string>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="settings_title_desc">DNS та брандмауер, що легко налаштовуються</string>
     <string name="always_on_dialog_lockdown_stop_message">Rethink запускає VPN у режимі <i>Блокування</i>. Його зупинка призведе до втрати підключення до Інтернету для цього профілю користувача. Ви все одно хочете продовжити\?</string>
     <string name="private_dns_dialog_heading">Вимкнути Приватний DNS</string>
@@ -430,7 +428,6 @@
     <string name="about_bug_report" translatable="true">Звіт про помилку</string>
     <string name="about_docs" translatable="true">Читати документацію</string>
     <string name="firewall_rule_block_http" translatable="true">Незахищенний HTTP</string>
-    <string name="about_sponsor_link_text" translatable="true">Спонсорувати</string>
     <string name="univ_firewall_rule_4" translatable="true">Блокувати UDP, крім DNS та NTP</string>
     <string name="univ_view_blocked_ip" translatable="true">Правила IP та портів</string>
     <string name="about_web" translatable="true">посилання</string>

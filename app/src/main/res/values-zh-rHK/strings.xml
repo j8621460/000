@@ -74,8 +74,6 @@
     <string name="ada_app_exclude">排除</string>
     <string name="rethink_sky_desc">超過 280 個地方；更長嘅在線時間；喺 cloudflare.com 上面行嘅中間解析服務</string>
     <string name="dc_rethink_dns">Rethink DNS</string>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_about">關於</string>
     <string name="title_settings">設定</string>
     <string name="settings_title_desc">一款可以高度自訂嘅 DNS 同防火牆軟件</string>
@@ -331,7 +329,6 @@
     <string name="about_faq">睇常見問題</string>
     <string name="about_docs">睇文檔</string>
     <string name="about_connect">聯繫我哋</string>
-    <string name="about_sponsor_link_text">贊助</string>
     <string name="about_app">app</string>
     <string name="about_email">電郵聯繫</string>
     <string name="about_settings">系統</string>

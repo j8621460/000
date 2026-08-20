@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RethinkDNS</string>
     <string name="title_about">O Rethink</string>
     <string name="title_settings">Ustawienia</string>
     <string name="slide_2_desc">RethinkDNS to najłatwiejszy sposób monitorowania aktywności sieciowej, omijania cenzury Internetu i zapory sieciowej na urządzeniu z Androidem.</string>
@@ -119,7 +118,6 @@
     <string name="ssv_most_blocked_domain_heading" description="This label will appear on the stats screen as a header for most blocked domains" translatable="true">najczęściej blokowane domeny</string>
     <string name="ssv_toast_start_rethink" description="This label will appear on the stats screen as toast to start Rethink app">Uruchom Rethink, aby kontynuować</string>
     <string name="ssv_see_more">Pokaż Wszystko</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="txt_home">Strona główna</string>
     <string name="settings_allow_bypass_heading">Włącz widoczność sieci</string>
     <string name="app_mode_dns_low_battery" translatable="true">DNS (oszczędzanie baterii)</string>
@@ -595,7 +593,6 @@
     <string name="dc_rethink_dns_radio" translatable="true">RethinkDNS</string>
     <string name="dc_dns_leaks_heading" translatable="true">Zapobieganie wyciekom DNS</string>
     <string name="about_bravedns_explantion" translatable="true">RethinkD to najprostszy sposób na monitorowanie aktywności aplikacji, obchodzenie cenzury internetowej i zapory aplikacji na urządzeniu z systemem Android.</string>
-    <string name="about_sponsor_link_text" translatable="true">Wesprzyj nas</string>
     <string name="about_app" translatable="true">aplikacja</string>
     <string name="collecting_logs_progress_text" translatable="true">Przechwytywanie…</string>
     <string name="contributors_dialog_title" translatable="true">Autorzy</string>
