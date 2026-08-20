@@ -34,6 +34,7 @@ import android.view.View
 import android.widget.CompoundButton
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import android.media.RingtoneManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -78,6 +79,7 @@ import com.celzero.bravedns.util.Utilities.getRandomString
 import com.celzero.bravedns.util.Utilities.isAtleastQ
 import com.celzero.bravedns.util.Utilities.isAtleastT
 import com.celzero.bravedns.util.Utilities.isFdroidFlavour
+import com.celzero.bravedns.util.NetworkAlertManager
 import com.celzero.bravedns.util.Utilities.showToastUiCentered
 import com.celzero.bravedns.util.handleFrostEffectIfNeeded
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -104,6 +106,7 @@ class MiscSettingsActivity : AppCompatActivity(R.layout.activity_misc_settings) 
     private var isThemeChanged: Boolean = false
     private lateinit var notificationPermissionResult: ActivityResultLauncher<String>
     private lateinit var bubbleSettingsResult: ActivityResultLauncher<Intent>
+    private lateinit var networkAlertSoundResult: ActivityResultLauncher<Intent>
 
     enum class BioMetricType(val action: Int, val mins: Long) {
         OFF(BIOMETRIC_ACTION_OFF, BIOMETRIC_MINS_OFF),
@@ -290,6 +293,9 @@ class MiscSettingsActivity : AppCompatActivity(R.layout.activity_misc_settings) 
         b.tombstoneAppSwitch.isChecked = persistentState.tombstoneApps
 
         b.settingsFirewallBubbleSwitch.isChecked = persistentState.firewallBubbleEnabled
+
+        b.settingsNetworkAlertsSwitch.isChecked = persistentState.networkAlertsEnabled
+        b.settingsNetworkAlertSoundDesc.text = NetworkAlertManager.currentSoundTitle(this)
 
         displayPcapUi()
         displayAppThemeUi()
@@ -673,6 +679,27 @@ class MiscSettingsActivity : AppCompatActivity(R.layout.activity_misc_settings) 
 
         b.settingsFirewallBubbleRl.setOnClickListener {
             b.settingsFirewallBubbleSwitch.isChecked = !b.settingsFirewallBubbleSwitch.isChecked
+        }
+
+        b.settingsNetworkAlertsSwitch.setOnCheckedChangeListener { _, isChecked ->
+            persistentState.networkAlertsEnabled = isChecked
+        }
+
+        b.settingsNetworkAlertsRl.setOnClickListener {
+            b.settingsNetworkAlertsSwitch.isChecked = !b.settingsNetworkAlertsSwitch.isChecked
+        }
+
+        b.settingsNetworkAlertSoundRl.setOnClickListener {
+            try {
+                networkAlertSoundResult.launch(NetworkAlertManager.buildPickerIntent())
+            } catch (e: ActivityNotFoundException) {
+                Logger.w(LOG_TAG_UI, "err launching notification sound picker: ${e.message ?: ""}")
+                showToastUiCentered(
+                    this,
+                    getString(R.string.network_alert_sound_picker_unavailable),
+                    Toast.LENGTH_SHORT
+                )
+            }
         }
 
         b.settingsFirewallBubbleSwitch.setOnCheckedChangeListener { _, isChecked ->
@@ -1120,6 +1147,15 @@ class MiscSettingsActivity : AppCompatActivity(R.layout.activity_misc_settings) 
                 } catch (e: Exception) {
                     Logger.w(LOG_TAG_UI, "err after bubble settings return: ${e.message}")
                 }
+            }
+
+        // Launcher for the system notification-sound picker used by network status alerts.
+        networkAlertSoundResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                val uri: android.net.Uri? =
+                    result.data?.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+                NetworkAlertManager.onSoundPicked(uri)
+                b.settingsNetworkAlertSoundDesc.text = NetworkAlertManager.currentSoundTitle(this)
             }
     }
 
