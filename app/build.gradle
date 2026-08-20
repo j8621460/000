@@ -237,7 +237,7 @@ dependencies {
     fullImplementation 'nl.dionsegijn:konfetti-xml:2.0.5'
 
     implementation 'com.waseemsabir:betterypermissionhelper:1.0.3'
-    lintChecks 'com.android.security.lint:lint:1.0.3'
+    lintChecks 'com.android.security.lint:lint:1.0.4'
 
     // ── Unit test dependencies ────────────────────────────────────────────────
     testImplementation 'junit:junit:4.13.2'
