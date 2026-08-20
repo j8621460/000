@@ -294,7 +294,6 @@
     <string name="lbl_proceed">متابعة</string>
     <string name="hsf_start_dialog_positive">ابدأ</string>
     <string name="dc_dns_website_desc">يجلب ايقونات مواقع الويب من <i> nextdns.io </i> و <i> duckduckgo.com </i>. يستهلك ما يصل إلى 350 ميغابايت في مساحة القرص</string>
-    <string name="about_sponsor_link_text">كفيل</string>
     <string name="cd_custom_doh_url_name_default">DoH</string>
     <string name="cd_dns_proxy_mode_external">خارجي</string>
     <string name="cd_dns_crypt_resolver_heading">محلل</string>
@@ -592,7 +591,6 @@
 \n
 \n%2$s</string>
     <string name="firewall_status_isolate">معزول</string>
-    <string name="app_name_small_case">إعادة التفكير</string>
     <string name="about_title_desc">كشف ومنع التهديدات الأمنية للشبكة</string>
     <string name="bypass_universal">تجاوز كلي</string>
     <string name="firewall_mode_notification_title">محمي! متصل بجدار الحماية.</string>
@@ -601,7 +599,6 @@
     <string name="title_settings">الإعدادات</string>
     <string name="status_failing" description="This text appears if the connection is currently not working correctly. [CHAR_LIMIT=NONE]">يفشل</string>
     <string name="status_dns_server_down">خادم نظام أسماء النطاقات متوقف</string>
-    <string name="app_name">إعادة التفكير</string>
     <string name="pause_title_desc">يأخذ غفوة…</string>
     <string name="next">التالي</string>
     <string name="slide_2_title">أهلاً وسهلاً</string>

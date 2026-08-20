@@ -734,7 +734,6 @@
     <string name="about_faq" translatable="true">ดูคำถามที่พบบ่อย</string>
     <string name="about_docs" translatable="true">อ่านเอกสาร</string>
     <string name="about_privacy_policy" translatable="true">อ่านนโยบายความเป็นส่วนตัว</string>
-    <string name="about_sponsor_link_text" translatable="true">สปอนเซอร์</string>
     <string name="about_app" translatable="true">แอป</string>
     <string name="about_email" translatable="true">ส่งอีเมล์ถึงเรา</string>
     <string name="about_settings" translatable="true">ระบบ</string>

@@ -212,7 +212,6 @@
     <string name="dc_other_dns_heading">类型</string>
     <string name="dc_dns_website_desc">从 <i>nextdns.io</i> 与 <i>duckduckgo.com</i> 获取网站图标。约占用 350 MB 磁盘空间</string>
     <string name="about_faq">查阅常见问题</string>
-    <string name="about_sponsor_link_text">赞助</string>
     <string name="univ_firewall_rule_1">设备锁定时拦截所有应用</string>
     <string name="univ_accessibility_crash_dialog_positive">前往设置</string>
     <string name="dns_connected">已连接</string>
@@ -569,9 +568,7 @@
     <string name="about_docs_link">https://docs.rethinkdns.com/</string>
     <string name="ada_app_status_allow">已放行</string>
     <string name="lbbs_copy">复制为 RDNS+ URL</string>
-    <string name="app_name">RethinkDNS</string>
     <string name="settings_title_desc">一款可高度自定义的 DNS 与防火墙软件</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_about">关于</string>
     <string name="next">下一步</string>
     <string name="isolate">隔离</string>

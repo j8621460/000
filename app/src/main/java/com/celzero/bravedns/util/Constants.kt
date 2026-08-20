@@ -135,8 +135,8 @@ class Constants {
         // default filetag.json for remote blocklist (stored in assets folder) (v055o)
         const val PACKAGED_REMOTE_FILETAG_TIMESTAMP: Long = 1753394162186
 
-        // rethinkdns sponsor link
-        const val RETHINKDNS_SPONSOR_LINK = "https://svc.rethinkdns.com/r/sponsor"
+        // sponsor link for this fork (upstream's was https://svc.rethinkdns.com/r/sponsor)
+        const val RETHINKDNS_SPONSOR_LINK = "https://ko-fi.com/creatoreprints"
 
         // base-url for bravedns
         const val BRAVEDNS_DOMAIN = "bravedns.com"

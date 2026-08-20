@@ -226,7 +226,6 @@
     <string name="dns_card_latency_active">লেটেন্সি: %1$sms</string>
     <string name="dc_entries">%1$s এন্ট্রি 🔗</string>
     <string name="about_bug_no_log_dialog_positive_btn">ইচিঠি পাঠাও</string>
-    <string name="about_sponsor_link_text">স্পন্সর</string>
     <string name="about_settings_app_info">অ্যাপের তথ্য</string>
     <string name="about_mozilla">RethinkDNS হল Mozilla Builders MVP প্রোগ্রামের অংশ।</string>
     <string name="about_mail_bugreport_share_title">ইমেল প্রদানকারী নির্বাচন করুন</string>
@@ -355,9 +354,7 @@
     <string name="about_dialog_neutral_button">বৈশিষ্ট্য প্রস্তাব করুন</string>
     <string name="univ_firewall_rule_1">ডিভাইস লক হয়ে গেলে সমস্ত অ্যাপ ব্লক করুন</string>
     <string name="univ_firewall_rule_7">IPv6 তে IPv4 ব্লক করুন (পরীক্ষামূলক)</string>
-    <string name="app_name">RethinkDNS</string>
     <string name="pause_title_desc">ঘুমানো…</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_settings">পছন্দসমূহ</string>
     <string name="title_about">বিস্তারিত</string>
     <string name="finish">শেষ করুন</string>

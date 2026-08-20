@@ -178,8 +178,8 @@ class PersistentState(context: Context) : SimpleKrate(context), KoinComponent {
         stringPref("connected_dns_name")
             .withDefault<String>(context.getString(R.string.default_dns_name))
 
-    // the current light/dark theme; 0's the default which is "Set by System"
-    var theme by intPref("app_theme").withDefault<Int>(0)
+    // this fork ships only Dark Plus; 5 is Themes.DARK_PLUS.id
+    var theme by intPref("app_theme").withDefault<Int>(5)
 
     // user selected notification action type, ref: Constants#NOTIFICATION_ACTION_STOP
     var notificationActionType by intPref("notification_action").withDefault<Int>(0)

@@ -786,7 +786,6 @@
     <string name="hsf_proxy_chip_text" translatable="true">Proxy aktivní</string>
     <string name="hsf_packet_capture_chip_text" translatable="true">Zachytávání paketů aktivní</string>
     <string name="hsf_blocklist_chip_text_no_data" translatable="true">Povolit RDNS+</string>
-    <string name="about_sponsor_link_text" translatable="true">Sponzorovat</string>
     <string name="about_email" translatable="true">Napište nám e-mail</string>
     <string name="about_settings" translatable="true">systém</string>
     <string name="about_settings_app_info" translatable="true">Info o aplikaci</string>

@@ -455,7 +455,6 @@
     <string name="about_github" translatable="true">קח חלק בפיתוח ב-GitHub</string>
     <string name="about_faq" translatable="true">שאלות נפוצות</string>
     <string name="about_app" translatable="true">אפליקציה</string>
-    <string name="about_sponsor_link_text" translatable="true">תן חסות</string>
     <string name="about_email" translatable="true">שלח לנו דוא\"ל</string>
     <string name="about_settings_notification" translatable="true">הגדרות של התראות</string>
     <string name="dns_card_latency_inactive" translatable="true">הפעל מצב DNS.</string>

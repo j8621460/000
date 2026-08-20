@@ -57,7 +57,12 @@ android {
     namespace 'com.celzero.bravedns'
 
     defaultConfig {
-        applicationId "com.celzero.bravedns"
+        // Installed package identity for this fork. `namespace` is deliberately
+        // left as com.celzero.bravedns: it only controls the generated R/BuildConfig
+        // package, and changing it would require moving ~460 source files and
+        // rewriting every import. applicationId is what defines the package on
+        // device, which is what the fork needs to differ.
+        applicationId "com.creatore.rethinkfork"
         minSdkVersion(26)
         targetSdkVersion 35
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

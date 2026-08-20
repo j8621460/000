@@ -12,8 +12,6 @@
     <string name="block">blocca</string>
     <string name="status_app_error">errore dell\'app</string>
     <string name="status_dns_error">errore del dns</string>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_about">Info</string>
     <string name="title_settings">Impostazioni</string>
     <string name="pause_title_desc">faccio un pisolino…</string>
@@ -410,7 +408,6 @@
     <string name="about_docs">Leggi la documentazione</string>
     <string name="about_connect">contatti</string>
     <string name="about_mozilla">Rethink fa parte del programma Mozilla Builders MVP, FOSS United Foundation, OSOM Products Inc.</string>
-    <string name="about_sponsor_link_text">Sostienici</string>
     <string name="about_app">app</string>
     <string name="about_email">Scrivici una email</string>
     <string name="about_settings">sistema</string>

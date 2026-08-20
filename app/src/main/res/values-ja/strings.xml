@@ -211,7 +211,6 @@
     <string name="hsf_notification_permission_failure" translatable="true">設定画面から通知機能を有効にする</string>
     <string name="lbl_proceed" translatable="true">続行</string>
     <string name="about_connect" translatable="true">問い合わせ</string>
-    <string name="about_sponsor_link_text" translatable="true">支援者</string>
     <string name="about_email" translatable="true">メール</string>
     <string name="about_settings" translatable="true">システム</string>
     <string name="about_settings_app_info" translatable="true">アプリ情報</string>

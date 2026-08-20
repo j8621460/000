@@ -10,7 +10,6 @@
     <string name="pause_mode_notification_title">متوقف شد! برنامه های مسدود شده همچنان دیوار آتش می شوند.</string>
     <string name="orbot_install_dialog_message">Orbot ویژگی ها و عملکرد Tor را به اندروید می آورد.</string>
     <string name="pause_text">متوقف شده</string>
-    <string name="app_name">RethinkDNS</string>
     <string name="settings_title_desc">DNS و فایروال بسیار قابل تنظیم</string>
     <string name="orbot_install_dialog_positive">نصب</string>
     <string name="about_title_desc">شناسایی و مسدود کردن تهدیدات امنیتی شبکه</string>
@@ -35,7 +34,6 @@
     <string name="slide_1_title">رایگان و متن‌باز</string>
     <string name="hybrid_mode_info_title">DNS + دیوار آتش</string>
     <string name="dns_mode_info_title">DNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="firewall_mode_info_title">دیوار آتش</string>
     <string name="status_protected_with_tor_private_dns">محافظت شده با tor و dns خصوصی</string>
     <string name="block">مسدود کردن</string>
@@ -444,7 +442,6 @@
     <string name="about_faq" translatable="true">مشاهده سوالات متداول</string>
     <string name="about_docs" translatable="true">اسناد را بخوانید</string>
     <string name="about_app_update_check" translatable="true">بررسی به‌روزرسانی‌های برنامه</string>
-    <string name="about_sponsor_link_text" translatable="true">اسپانسر</string>
     <string name="about_connect" translatable="true">تماس</string>
     <string name="settings_notification_dialog_title" translatable="true">انتخاب اقدام اعلان</string>
     <string name="hs_biometeric_desc" translatable="true">برای باز کردن قفل Rethink از احراز هویت بیومتریک استفاده کنید</string>

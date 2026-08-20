@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_about">À propos</string>
     <string name="title_settings">Paramètres</string>
     <string name="txt_home">Accueil</string>
@@ -368,7 +366,6 @@
     <string name="settings_orbot_header">Orbot ❯</string>
     <string name="orbot_bs_status_1">Transfert de %1$s connexions à Orbot.</string>
     <string name="about_bug_no_log_dialog_title">Rapport de bogue</string>
-    <string name="about_sponsor_link_text">Soutenir</string>
     <string name="dns_btm_latency_ms">%1$ss</string>
     <string name="hs_download_positive_website">Visitez le site web</string>
     <string name="univ_firewall_rule_3">Bloquer les applications dont la source est inconnue</string>

@@ -93,8 +93,6 @@
     <string name="info_dialog_rethink_toast_msg">Gekopieerd als RDNS+ DNS-over-HTTPS URL</string>
     <string name="settings_enable_logs_desc">Sla DNS- en firewall-logs lokaal op het apparaat op.</string>
     <string name="app_mode_choose">Kies de modus</string>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_settings">Instellingen</string>
     <string name="pause_title_desc">een dutje doen…</string>
     <string name="about_title_desc">Detecteer en blokkeer netwerkbeveiligingsbedreigingen</string>
@@ -598,7 +596,6 @@
     <string name="settings_biometric_desc" translatable="true">Beveilig deze app met uw schermvergrendeling</string>
     <string name="hs_biometeric_title" translatable="true">Ontgrendel Rethink</string>
     <string name="lbl_battery_optimization" translatable="true">Batterij optimalisatie</string>
-    <string name="about_sponsor_link_text" translatable="true">Sponsor</string>
     <string name="cd_dns_crypt_relay_name" translatable="true">DNSRelay %1$s</string>
     <string name="cd_dns_crypt_dialog_title" translatable="true">DNSCrypt Resolver of Relay toevoegen</string>
     <string name="cd_dns_crypt_dialog_heading" translatable="true">DNSCrypt Resolver of Relay toevoegen</string>

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RethinkDNS</string>
-    <string name="app_name_small_case">rethink</string>
     <string name="title_settings">Einstellungen</string>
     <string name="title_about">Über</string>
     <string name="about_title_desc">Netzwerksicherheitsbedrohungen erkennen und blockieren</string>
@@ -529,7 +527,6 @@
     <string name="about_bug_report_dialog_positive_btn">E-Mail senden</string>
     <string name="about_app">App</string>
     <string name="about_email">Sende uns eine E-Mail</string>
-    <string name="about_sponsor_link_text">Sponsor</string>
     <string name="about_twitter">Folge uns auf Twitter</string>
     <string name="about_mozilla">Rethink wird von Mozilla Builders, FOSS United Foundation und FLOSS/fund unterstützt.</string>
     <string name="about_dialog_positive_button">Los geht\'s</string>
