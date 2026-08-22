@@ -1972,9 +1972,15 @@
     
     <string name="warp_tunnel_title">WARP Tunnel</string>
     <string name="warp_register_button">Register with WARP</string>
+    <string name="warp_register_confirm">Register device with Cloudflare WARP?</string>
     <string name="warp_registering">Registering…</string>
     <string name="warp_registered_ok">WARP registered successfully</string>
     <string name="warp_register_failed">WARP registration failed. Try again.</string>
+    <string name="warp_refresh_button">Refresh WARP config</string>
+    <string name="warp_refresh_confirm">Re-register this device and refresh config.json?</string>
+    <string name="warp_refreshing">Refreshing config…</string>
+    <string name="warp_refreshed_ok">WARP config refreshed successfully</string>
+    <string name="warp_refresh_failed">WARP config refresh failed. Try again.</string>
     <string name="warp_not_registered">Register with WARP first</string>
     <string name="warp_start_failed">Failed to start WARP tunnel</string>
     <string name="warp_status_active">Connected — routing via Cloudflare WARP</string>
