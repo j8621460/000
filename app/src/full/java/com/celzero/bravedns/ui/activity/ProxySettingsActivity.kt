@@ -435,10 +435,22 @@ class ProxySettingsActivity : AppCompatActivity(R.layout.fragment_proxy_configur
     // ===== WARP METHODS =====
 
     private fun showWarpRegistrationDialog() {
+        val alreadyRegistered = UsqueManager.isRegistered(this)
+        val title = if (alreadyRegistered) R.string.warp_refresh_button else R.string.warp_register_button
+        val message = if (alreadyRegistered) {
+            getString(R.string.warp_refresh_confirm)
+        } else {
+            getString(R.string.warp_register_confirm)
+        }
+        val positiveLabel = if (alreadyRegistered) {
+            getString(R.string.warp_refresh_button)
+        } else {
+            getString(R.string.warp_register_button)
+        }
         MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
-            .setTitle(R.string.warp_register_button)
-            .setMessage("Register device with Cloudflare WARP?")
-            .setPositiveButton("Register") { dialog, _ -> dialog.dismiss(); registerWarp() }
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveLabel) { dialog, _ -> dialog.dismiss(); registerWarp() }
             .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
             .setCancelable(true)
             .create()
@@ -446,21 +458,31 @@ class ProxySettingsActivity : AppCompatActivity(R.layout.fragment_proxy_configur
     }
 
     private fun registerWarp() {
+        // Capture whether a config.json already existed *before* this call so the
+        // outcome toast (and progress title) can say "refreshed" vs "registered".
+        val wasAlreadyRegistered = UsqueManager.isRegistered(this)
+        val progressTitle = if (wasAlreadyRegistered) R.string.warp_refreshing else R.string.warp_registering
         val progressDialog = MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
-            .setTitle(R.string.warp_registering)
-            .setMessage(R.string.warp_registering)
+            .setTitle(progressTitle)
+            .setMessage(progressTitle)
             .setCancelable(false)
             .create()
         progressDialog.show()
         io {
+            // registerWithWarp() deletes any existing config.json and re-registers,
+            // so calling it again when already registered is what performs the refresh.
             val registered = UsqueManager.registerWithWarp(this@ProxySettingsActivity)
             uiCtx {
                 progressDialog.dismiss()
                 // No post-register modal: surface the outcome via a toast and
                 // let the proxy row reflect the new state.
-                val msg =
-                    if (registered) getString(R.string.warp_registered_ok)
+                val msg = if (registered) {
+                    if (wasAlreadyRegistered) getString(R.string.warp_refreshed_ok)
+                    else getString(R.string.warp_registered_ok)
+                } else {
+                    if (wasAlreadyRegistered) getString(R.string.warp_refresh_failed)
                     else getString(R.string.warp_register_failed)
+                }
                 showToastUiCentered(
                     this@ProxySettingsActivity,
                     msg,
@@ -489,9 +511,16 @@ class ProxySettingsActivity : AppCompatActivity(R.layout.fragment_proxy_configur
             else         -> getString(R.string.warp_status_unregistered)
         }
 
-        // Register button: only shown when not yet registered
-        b.settingsActivityWarpRegisterBtn.visibility =
-            if (isRegistered) View.GONE else View.VISIBLE
+        // Register button: stays visible at all times. Once a config.json
+        // already exists, tapping it re-registers (registerWarp() deletes
+        // the old config.json first), which is effectively a refresh — so
+        // relabel it instead of hiding it.
+        b.settingsActivityWarpRegisterBtn.visibility = View.VISIBLE
+        b.settingsActivityWarpRegisterBtn.text = if (isRegistered) {
+            getString(R.string.warp_refresh_button)
+        } else {
+            getString(R.string.warp_register_button)
+        }
 
         // config.json editor row: only meaningful once registered (a config
         // file exists on disk). Populate the field the first time the row
