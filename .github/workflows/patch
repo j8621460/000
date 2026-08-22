@@ -1,0 +1,229 @@
+name: Apply WARP register-button fix
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  apply-fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create branch
+        run: git checkout -b fix/warp-register-button-refresh
+
+      - name: Patch ProxySettingsActivity.kt
+        run: |
+          python3 - <<'PYEOF'
+import re
+
+path = "app/src/full/java/com/celzero/bravedns/ui/activity/ProxySettingsActivity.kt"
+with open(path, "r", encoding="utf-8") as f:
+    src = f.read()
+
+old_dialog = '''    private fun showWarpRegistrationDialog() {
+        MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
+            .setTitle(R.string.warp_register_button)
+            .setMessage("Register device with Cloudflare WARP?")
+            .setPositiveButton("Register") { dialog, _ -> dialog.dismiss(); registerWarp() }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+            .setCancelable(true)
+            .create()
+            .show()
+    }'''
+
+new_dialog = '''    private fun showWarpRegistrationDialog() {
+        val alreadyRegistered = UsqueManager.isRegistered(this)
+        val title = if (alreadyRegistered) R.string.warp_refresh_button else R.string.warp_register_button
+        val message = if (alreadyRegistered) {
+            getString(R.string.warp_refresh_confirm)
+        } else {
+            getString(R.string.warp_register_confirm)
+        }
+        val positiveLabel = if (alreadyRegistered) {
+            getString(R.string.warp_refresh_button)
+        } else {
+            getString(R.string.warp_register_button)
+        }
+        MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
+            .setTitle(title)
+            .setMessage(message)
+            .setPositiveButton(positiveLabel) { dialog, _ -> dialog.dismiss(); registerWarp() }
+            .setNegativeButton("Cancel") { dialog, _ -> dialog.dismiss() }
+            .setCancelable(true)
+            .create()
+            .show()
+    }'''
+
+assert old_dialog in src, "showWarpRegistrationDialog block not found"
+src = src.replace(old_dialog, new_dialog)
+
+old_register = '''    private fun registerWarp() {
+        val progressDialog = MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
+            .setTitle(R.string.warp_registering)
+            .setMessage(R.string.warp_registering)
+            .setCancelable(false)
+            .create()
+        progressDialog.show()
+        io {
+            val registered = UsqueManager.registerWithWarp(this@ProxySettingsActivity)
+            uiCtx {
+                progressDialog.dismiss()
+                // No post-register modal: surface the outcome via a toast and
+                // let the proxy row reflect the new state.
+                val msg =
+                    if (registered) getString(R.string.warp_registered_ok)
+                    else getString(R.string.warp_register_failed)
+                showToastUiCentered(
+                    this@ProxySettingsActivity,
+                    msg,
+                    Toast.LENGTH_SHORT
+                )
+                updateWarpUi()
+            }
+        }
+    }'''
+
+new_register = '''    private fun registerWarp() {
+        // Capture whether a config.json already existed *before* this call so the
+        // outcome toast (and progress title) can say "refreshed" vs "registered".
+        val wasAlreadyRegistered = UsqueManager.isRegistered(this)
+        val progressTitle = if (wasAlreadyRegistered) R.string.warp_refreshing else R.string.warp_registering
+        val progressDialog = MaterialAlertDialogBuilder(this, R.style.App_Dialog_NoDim)
+            .setTitle(progressTitle)
+            .setMessage(progressTitle)
+            .setCancelable(false)
+            .create()
+        progressDialog.show()
+        io {
+            // registerWithWarp() deletes any existing config.json and re-registers,
+            // so calling it again when already registered is what performs the refresh.
+            val registered = UsqueManager.registerWithWarp(this@ProxySettingsActivity)
+            uiCtx {
+                progressDialog.dismiss()
+                // No post-register modal: surface the outcome via a toast and
+                // let the proxy row reflect the new state.
+                val msg = if (registered) {
+                    if (wasAlreadyRegistered) getString(R.string.warp_refreshed_ok)
+                    else getString(R.string.warp_registered_ok)
+                } else {
+                    if (wasAlreadyRegistered) getString(R.string.warp_refresh_failed)
+                    else getString(R.string.warp_register_failed)
+                }
+                showToastUiCentered(
+                    this@ProxySettingsActivity,
+                    msg,
+                    Toast.LENGTH_SHORT
+                )
+                updateWarpUi()
+            }
+        }
+    }'''
+
+assert old_register in src, "registerWarp block not found"
+src = src.replace(old_register, new_register)
+
+old_visibility = '''        // Register button: only shown when not yet registered
+        b.settingsActivityWarpRegisterBtn.visibility =
+            if (isRegistered) View.GONE else View.VISIBLE'''
+
+new_visibility = '''        // Register button: stays visible at all times. Once a config.json
+        // already exists, tapping it re-registers (registerWarp() deletes
+        // the old config.json first), which is effectively a refresh — so
+        // relabel it instead of hiding it.
+        b.settingsActivityWarpRegisterBtn.visibility = View.VISIBLE
+        b.settingsActivityWarpRegisterBtn.text = if (isRegistered) {
+            getString(R.string.warp_refresh_button)
+        } else {
+            getString(R.string.warp_register_button)
+        }'''
+
+assert old_visibility in src, "visibility block not found"
+src = src.replace(old_visibility, new_visibility)
+
+with open(path, "w", encoding="utf-8") as f:
+    f.write(src)
+
+print("ProxySettingsActivity.kt patched successfully")
+PYEOF
+
+      - name: Patch strings.xml
+        run: |
+          python3 - <<'PYEOF'
+path = "app/src/main/res/values/strings.xml"
+with open(path, "r", encoding="utf-8") as f:
+    src = f.read()
+
+old = '''    <string name="warp_register_button">Register with WARP</string>
+    <string name="warp_registering">Registering…</string>
+    <string name="warp_registered_ok">WARP registered successfully</string>
+    <string name="warp_register_failed">WARP registration failed. Try again.</string>'''
+
+new = '''    <string name="warp_register_button">Register with WARP</string>
+    <string name="warp_register_confirm">Register device with Cloudflare WARP?</string>
+    <string name="warp_registering">Registering…</string>
+    <string name="warp_registered_ok">WARP registered successfully</string>
+    <string name="warp_register_failed">WARP registration failed. Try again.</string>
+    <string name="warp_refresh_button">Refresh WARP config</string>
+    <string name="warp_refresh_confirm">Re-register this device and refresh config.json?</string>
+    <string name="warp_refreshing">Refreshing config…</string>
+    <string name="warp_refreshed_ok">WARP config refreshed successfully</string>
+    <string name="warp_refresh_failed">WARP config refresh failed. Try again.</string>'''
+
+assert old in src, "strings.xml block not found"
+src = src.replace(old, new)
+
+with open(path, "w", encoding="utf-8") as f:
+    f.write(src)
+
+print("strings.xml patched successfully")
+PYEOF
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app/src/full/java/com/celzero/bravedns/ui/activity/ProxySettingsActivity.kt app/src/main/res/values/strings.xml
+          git commit -m "fix(warp): keep register button visible and repurpose as refresh
+
+Previously the WARP register button (settingsActivityWarpRegisterBtn)
+was hidden entirely once UsqueManager.isRegistered() returned true,
+leaving no way to re-register or refresh config.json from the UI.
+
+registerWithWarp() already deletes any existing config.json and
+re-registers, so re-invoking it when already registered is
+effectively a refresh. This change keeps the button visible at all
+times, relabeling it to 'Refresh WARP config' once registered, and
+updates the confirmation dialog and toast copy to reflect refresh vs.
+initial registration."
+
+      - name: Push branch
+        run: git push origin fix/warp-register-button-refresh -f
+
+      - name: Open pull request
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh pr create \
+            --title "fix(warp): keep register button visible, repurpose as refresh" \
+            --body "## Problem
+The WARP **Register** button (\`settingsActivityWarpRegisterBtn\`) disappeared permanently after a successful registration, because \`updateWarpUi()\` set its visibility to \`View.GONE\` whenever \`UsqueManager.isRegistered()\` was true. There was no way to re-register or refresh \`config.json\` from the UI afterward.
+
+## Fix
+- The button now stays \`View.VISIBLE\` at all times.
+- Once already registered, its label switches to **Refresh WARP config**, and the confirmation dialog / progress dialog / result toast copy switch to refresh-flavored strings.
+- Tapping it calls the same \`registerWarp()\` → \`UsqueManager.registerWithWarp()\` path, which already deletes the existing \`config.json\` and re-registers — this is what performs the refresh, no new backend logic needed.
+- Added corresponding string resources (\`warp_refresh_button\`, \`warp_refresh_confirm\`, \`warp_refreshing\`, \`warp_refreshed_ok\`, \`warp_refresh_failed\`).
+
+## Files changed
+- \`app/src/full/java/com/celzero/bravedns/ui/activity/ProxySettingsActivity.kt\`
+- \`app/src/main/res/values/strings.xml\`
+
+Generated by a one-time manually-triggered workflow; safe to delete \`.github/workflows/apply-warp-fix.yml\` after merge." \
+            --base main \
+            --head fix/warp-register-button-refresh
